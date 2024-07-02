@@ -47,10 +47,20 @@ const SubmitButton = styled.button`
   cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
 `;
 
+const LoginText = styled.strong`
+  margin-top: 20px;
+  cursor: pointer;
+  color: #007bff;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 function Signup() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
+    id: '',
     email: '',
     age: '',
     password: '',
@@ -66,6 +76,11 @@ function Signup() {
     // 이름 유효성 검사
     if (!formData.name.trim()) {
       newErrors.name = "이름을 입력해주세요";
+    }
+
+    // 아이디 유효성 검사
+    if (!formData.id.trim()) {
+      newErrors.id = "아이디를 입력해주세요";
     }
 
     // 이메일 유효성 검사
@@ -151,6 +166,16 @@ function Signup() {
         </InputContainer>
         <InputContainer>
           <Input
+            type="text"
+            name="id"
+            placeholder="아이디를 입력해주세요"
+            value={formData.id}
+            onChange={handleChange}
+          />
+          {errors.id && <ErrorMessage>{errors.id}</ErrorMessage>}
+        </InputContainer>
+        <InputContainer>
+          <Input
             type="email"
             name="email"
             placeholder="이메일을 입력해주세요"
@@ -191,6 +216,7 @@ function Signup() {
         </InputContainer>
         <SubmitButton type="submit" disabled={!isFormValid}>제출하기</SubmitButton>
       </form>
+      <LoginText onClick={() => navigate('/login')}>로그인 페이지로 이동하기</LoginText>
     </Container>
   );
 }
