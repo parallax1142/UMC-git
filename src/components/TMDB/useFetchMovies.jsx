@@ -1,24 +1,25 @@
-// useFetchMovies.js 파일
 import { useState, useEffect } from 'react';
 
-const useFetchMovies = (API_ENDPOINT) => {
+const useFetchMovies = (apiEndpoint, page) => {
   const [movies, setMovies] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await fetch(API_ENDPOINT);
+        const response = await fetch(`${apiEndpoint}&page=${page}`);
         const data = await response.json();
         setMovies(data.results);
+        setTotalPages(data.total_pages);
       } catch (error) {
-        console.error('Error fetching movies:', error);
+        console.error("Failed to fetch movies:", error);
       }
     };
 
     fetchMovies();
-  }, [API_ENDPOINT]);
+  }, [apiEndpoint, page]);
 
-  return movies;
+  return { movies, totalPages };
 };
 
 export default useFetchMovies;
