@@ -7,6 +7,7 @@ import TopRated from "./components/TMDB/TopRated";
 import UpComing from "./components/TMDB/UpComing";
 import MovieDetail from "./components/TMDB/MovieDetail";
 import Signup from "./components/TMDB/Signup";
+import Login from "./components/TMDB/Login";
 import NotFound from "./components/TMDB/NotFound"; // NotFound 컴포넌트 추가
 import styled, { keyframes } from "styled-components";
 
@@ -65,6 +66,7 @@ function App() {
             <NavItem to="/Home">UMC Movie</NavItem>
           </div>
           <div>
+            <NavItem to="/Login">로그인</NavItem>
             <NavItem to="/Signup">회원가입</NavItem>
             <NavItem to="/NowPlaying">NowPlaying</NavItem>
             <NavItem to="/Popular">Popular</NavItem>
@@ -75,6 +77,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/Home" />} />
           <Route path="/Home" element={<Home />} />
+          <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/NowPlaying" element={<NowPlaying />} />
           <Route path="/Popular" element={<Popular />} />
